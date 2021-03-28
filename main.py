@@ -10,6 +10,7 @@ main_file = None
 
 # ARCHIVO PRINCIPAL
 def set_file():
+    global main_file
     main_file = file_reader(True)
 
 # SALIR
