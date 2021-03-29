@@ -61,8 +61,9 @@ def parse_file(lines):
             current_grammar_index += 1
             is_context_free_grammar = False
         
-    # DICCIONARIO DE GRAMÁTICAS INVALIDAS
-    dict_to_json(grammars_invalid_dict, './out/invalid_grammars.json')
 
     # DICCIONARIO DE SALIDA
-    return grammars_dict
+    return {
+        "validGrammars": grammars_dict,
+        "invalidGrammars": grammars_invalid_dict
+    }

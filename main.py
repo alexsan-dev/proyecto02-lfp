@@ -19,7 +19,8 @@ def set_file():
     main_dict = parse_file(main_file)
 
     # JSON DE SALIDA
-    dict_to_json(main_dict, './out/result.json')
+    dict_to_json(main_dict.get("validGrammars"), './out/grammars.json')
+    dict_to_json(main_dict.get("invalidGrammars"), './out/invalid_grammars.json')
 
 # SALIR
 def exit_app():
