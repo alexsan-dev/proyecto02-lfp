@@ -1,0 +1,16 @@
+{
+  "Grm1": {
+    "noTerminals": ["S", "A", "B", "C"],
+    "terminals": ["a", "b", "z"],
+    "initialTerminal": ["S"],
+    "productions": [
+      { "entry": "S", "transitions": ["A"] },
+      { "entry": "A", "transitions": ["a", "A", "a"] },
+      { "entry": "A", "transitions": ["B"] },
+      { "entry": "B", "transitions": ["b", "B", "b"] },
+      { "entry": "B", "transitions": ["C"] },
+      { "entry": "C", "transitions": ["z", "C"] },
+      { "entry": "C", "transitions": ["z"] }
+    ]
+  }
+}

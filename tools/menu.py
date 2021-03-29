@@ -5,12 +5,13 @@ import os
 def menu(options, actions):
     # LIMPIAR
     os.system('clear' if os.name == 'posix' else 'cls')
-
+    
     # SEPARADOR
-    hr = "-" * (len(options) + 4)
+    title = " | ".join(map(lambda enum: f'({enum[0] + 1}) {enum[1]}', enumerate(options)))
+    hr = "-" * (len(title) + 4)
 
     # MENU
-    print(f'{hr}\n| {options} |\n{hr}')
+    print(f'{hr}\n| {title} |\n{hr}')
 
     # OPCIONES
     option = input('Escribe una opción: ')

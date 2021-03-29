@@ -1,17 +1,25 @@
+# IMPORTS
+import json
+
 # TOOLS
 from tools.menu import menu
+from tools.dictionaries import dict_to_json
 
 # FILES
 from files.reader import file_reader
+from files.parser import parse_file
 
 # GLOBALES
 menu_loop = True
-main_file = None
+main_grammars = []
 
 # ARCHIVO PRINCIPAL
 def set_file():
-    global main_file
-    main_file = file_reader(True)
+    main_file = file_reader(is_dev=True)
+    main_dict = parse_file(main_file)
+
+    # JSON DE SALIDA
+    dict_to_json(main_dict, './out/result.json')
 
 # SALIR
 def exit_app():
@@ -22,7 +30,7 @@ def exit_app():
 if __name__ == "__main__":
     # LOOP DE MENU
     while menu_loop:
-        menu('(1) Cargar archivo | (2) Salir', {
+        menu(['Cargar archivo', 'Salir'], {
             1: set_file,
             2: exit_app
         })
