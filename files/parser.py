@@ -5,6 +5,7 @@ import re
 from tools.dictionaries import dict_to_json
 
 def parse_file(lines):
+    # GLOBALES
     grammars_dict = {}
     grammars_names = []
     current_grammar_index = 0
