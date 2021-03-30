@@ -3,6 +3,7 @@ import json
 
 # TOOLS
 from tools.menu import arrow_menu
+from tools.grammars import print_grammar_info
 from tools.dictionaries import dict_to_json
 
 # FILES
@@ -14,6 +15,8 @@ main_grammars = []
 valid_grammars = {}
 
 # ARCHIVO PRINCIPAL
+
+
 def set_file():
     main_file = file_reader(is_dev=True)
     main_dict = parse_file(main_file)
@@ -28,13 +31,23 @@ def set_file():
     dict_to_json(invalid_grammars, './out/invalid_grammars.json')
 
 # MOSTRAR INFORMACIÓN
+
+
 def show_grammars_info():
-    arrow_menu("Selecciona una gramática:", list(valid_grammars.keys()))
+    # DICCIONARIO DE FUNCIONES
+    functions_dict = {}
+    for index, key in enumerate(valid_grammars.keys()):
+        functions_dict[str(index)] = lambda: print_grammar_info(
+            valid_grammars[key], key)
+
+    arrow_menu("Selecciona una gramática:", list(
+        valid_grammars.keys()), functions_dict)
+
 
 # INICIAR
 if __name__ == "__main__":
     # LOOP DE MENU
     arrow_menu("Selecciona una opción:", ["Cargar", "Información", "Autómata", "Recorrido", "Tabla"], {
-            "0": set_file,
-            "1": show_grammars_info
-        }, ["Esta opción permite cargar un archivo de entrada\n  con extensión .glc que contiene la información\n  de las gramáticas libres del contexto.", "Esta opción del menú deberá mostrar todos los\n  nombres de gramáticas que se encuentran\n  actualmente en el sistema para elegir una.", "Esta opción permite generar un autómata de pila\n  con respecto de alguna gramática independiente\n  del contexto previamente cargada.", "El usuario podrá elegir uno de los autómatas de\n  pila. Luego solicitará el ingreso de una cadena\n  de entrada para generar un recorrido animado.", "El usuario podrá elegir uno de los autómatas de\n  pila. Luego solicitará el ingreso de una cadena\n  de entrada para generar una tabla de resumen.", "Detiene totalmente la ejecución del programa, y\n  los datos temporales se perderán, a excepción\n  de los archivos de salida ya generados."], horizontal=True)
+        "0": set_file,
+        "1": show_grammars_info
+    }, ["Esta opción permite cargar un archivo de entrada\n  con extensión .glc que contiene la información\n  de las gramáticas libres del contexto.", "Esta opción del menú deberá mostrar todos los\n  nombres de gramáticas que se encuentran\n  actualmente en el sistema para elegir una.", "Esta opción permite generar un autómata de pila\n  con respecto de alguna gramática independiente\n  del contexto previamente cargada.", "El usuario podrá elegir uno de los autómatas de\n  pila. Luego solicitará el ingreso de una cadena\n  de entrada para generar un recorrido animado.", "El usuario podrá elegir uno de los autómatas de\n  pila. Luego solicitará el ingreso de una cadena\n  de entrada para generar una tabla de resumen.", "Detiene totalmente la ejecución del programa, y\n  los datos temporales se perderán, a excepción\n  de los archivos de salida ya generados."], horizontal=True)
