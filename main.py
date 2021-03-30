@@ -2,9 +2,9 @@
 import json
 
 # TOOLS
-from tools.menu import arrow_menu
+from tools.dictionaries import dict_to_json, get_functions_dict
 from tools.grammars import print_grammar_info
-from tools.dictionaries import dict_to_json
+from tools.menu import arrow_menu
 
 # FILES
 from files.reader import file_reader
@@ -18,6 +18,7 @@ valid_grammars = {}
 
 
 def set_file():
+    # PARSEAR ARCHIVO
     main_file = file_reader(is_dev=True)
     main_dict = parse_file(main_file)
 
@@ -35,11 +36,9 @@ def set_file():
 
 def show_grammars_info():
     # DICCIONARIO DE FUNCIONES
-    functions_dict = {}
-    for index, key in enumerate(valid_grammars.keys()):
-        functions_dict[str(index)] = lambda: print_grammar_info(
-            valid_grammars[key], key)
+    functions_dict = get_functions_dict(valid_grammars, print_grammar_info)
 
+    # MENU CON CON GRAMÁTICAS
     arrow_menu("Selecciona una gramática:", list(
         valid_grammars.keys()), functions_dict)
 
