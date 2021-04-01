@@ -40,13 +40,13 @@ def print_grammar_info(grammar, grammar_name):
 # MENSAJE DE ADVERTENCIA
 
 
-def are_empty_grammars(valid_grammars):
-    empty_len = len(valid_grammars.keys()) == 0
+def are_empty_grammars(valid_grammars, is_list=False, custom_warn='No se ha cargado ninguna gramática valida.'):
+    empty_len = len(valid_grammars if is_list else valid_grammars.keys()) == 0
 
     # MENSAJE DE ADVERTENCIA
     if empty_len:
         print(
-            f"\n{color.BOLD}{color.YELLOW}  ⚠️  No se ha cargado ninguna gramática valida.{color.END}")
+            f"\n{color.BOLD}{color.YELLOW}  ⚠️  {custom_warn}{color.END}")
         keyboard.read_key()
 
     return empty_len

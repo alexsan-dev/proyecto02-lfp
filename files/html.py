@@ -1,3 +1,4 @@
+# GRAMÁTICA A HTML
 def grammar_dict_to_HTML(grammar_dict, grammar_name):
     # LEER LINEAS DE TEMPLATE
     lfp_stream = open('./templates/digraph.html', encoding='utf-8')

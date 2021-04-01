@@ -12,12 +12,13 @@ def dict_to_json(file_dict, pathname):
 # ARREGLO DESDE DICCIONARIO
 
 
-def get_functions_dict(main_dict, function):
+def get_functions_dict(main_dict, function, is_list=False):
     functions_dict = {}
 
     # ENUMERAR
-    for index, key in enumerate(main_dict.keys()):
-        functions_dict[str(index)] = lambda: function(main_dict[key], key)
+    for index, key in enumerate(main_dict if is_list else main_dict.keys()):
+        functions_dict[str(index)] = lambda: function(
+            key) if is_list else function(main_dict[key], key)
 
     # SALIDA
     return functions_dict

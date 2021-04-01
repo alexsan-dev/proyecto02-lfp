@@ -8,6 +8,7 @@ from files.html import grammar_dict_to_HTML
 # TOOLS
 from tools.colors import color
 
+
 # GENERAR AUTOMATA DESDE GRAMÁTICA
 
 
@@ -21,3 +22,7 @@ def get_automaton_from_grammar(grammar_dict, grammar_name):
     # MENSAJE DE OK
     print(f'{color.BOLD}{color.GREEN}  ✔️  Automata generado correctamente.{color.END}')
     keyboard.read_key()
+
+
+def get_automaton_route_from_grammar(grammar_dict, grammar_name):
+    print(grammar_dict)
