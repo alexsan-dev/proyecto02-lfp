@@ -1,8 +1,13 @@
 # IMPORTS
 import re
+import keyboard
 
 # TOOLS
 from tools.dictionaries import dict_to_json
+
+# COLORES
+from tools.colors import color
+
 
 def parse_file(lines):
     # GLOBALES
@@ -11,7 +16,7 @@ def parse_file(lines):
     current_grammar_index = 0
     grammars_invalid_dict = {}
     is_context_free_grammar = False
-    
+
     # RECORRER LINEAS
     for line in lines.split("\n"):
         # NOMBRES DE GRAMÁTICAS
@@ -24,9 +29,9 @@ def parse_file(lines):
 
             # AGREGAR A DICCIONARIO
             grammars_dict[grammars_names[current_grammar_index]] = {
-                "noTerminals":symbols[0].split(','),
+                "noTerminals": symbols[0].split(','),
                 "terminals": symbols[1].split(','),
-                "initialTerminal": symbols[2].split(',')
+                "initialNoTerminal": symbols[2]
             }
 
         # PRODUCCIONES
@@ -41,18 +46,17 @@ def parse_file(lines):
 
             # VERIFICAR SI ES LIBRE DE CONTEXTO
             if len(transitions) == 3:
-                is_context_free_grammar = True 
+                is_context_free_grammar = True
 
             # AGREGAR A DICCIONARIO
             grammars_dict[current_name]['productions'] = productions
-
 
         # FINAL DE GRAMÁTICA
         if re.match("^\s*\*\s*", line):
             # ELIMINAR SI NO ES LIBRE DE CONTEXTO
             if not is_context_free_grammar:
                 # COPIAR
-                grammar_name = grammars_names[current_grammar_index] 
+                grammar_name = grammars_names[current_grammar_index]
                 grammars_invalid_dict[grammar_name] = grammars_dict[grammar_name]
 
                 # BORRAR Y SALIDA
@@ -61,7 +65,10 @@ def parse_file(lines):
             # AUMENTAR POSICIÓN DE GRAMÁTICAS
             current_grammar_index += 1
             is_context_free_grammar = False
-        
+
+    # MENSAJE DE CARGA
+    print(f'{color.BOLD}{color.GREEN}  ✔️  Gramática cargada correctamente.{color.END}')
+    keyboard.read_key()
 
     # DICCIONARIO DE SALIDA
     return {

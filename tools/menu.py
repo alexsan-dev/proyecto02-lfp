@@ -79,7 +79,7 @@ def arrow_menu(title="Selecciona una opción:", options=[], actions={}, helpers=
 
         # IMPRIMIR
         print(
-            f'\n  ⓘ  {color.BOLD}{color.UNDERLINE}{title}\n{color.END}  Puedes usar las flechas de tu{break_line}  teclado para moverte, despues{break_line}  presiona ENTER para seleccionar.{break_line}{break_line}{f"  ○{hr}○" if horizontal else ""}{break_line if horizontal else ""}{"  │ " if horizontal else ""}{header}{" │" if horizontal else ""}{f"{break_line}  ○{hr}○" if horizontal else ""}{break_line}{break_line}  {helpers[current_option_index] if len(helpers) > current_option_index else ""}{break_line}')
+            f'\n  ℹ️  {color.BOLD}{color.UNDERLINE}{title}\n{color.END}  Puedes usar las flechas de tu{break_line}  teclado para moverte, despues{break_line}  presiona ENTER para seleccionar.{break_line}{break_line}{f"  ○{hr}○" if horizontal else ""}{break_line if horizontal else ""}{"  │ " if horizontal else ""}{header}{" │" if horizontal else ""}{f"{break_line}  ○{hr}○" if horizontal else ""}{f"{break_line}{break_line}" if horizontal else ""}  {helpers[current_option_index] if len(helpers) > current_option_index else ""}')
 
         # ESPERAR ENTRADA
         key = keyboard.read_key(suppress=True)

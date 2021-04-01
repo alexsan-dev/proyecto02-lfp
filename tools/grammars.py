@@ -30,9 +30,23 @@ def print_grammar_info(grammar, grammar_name):
     break_line = "\n"
     brackets = ["{", "}"]
     print(
-        f'\n{color.BOLD}  Nombre de la gramática tipo 2 :{color.END} {grammar_name}\n{color.BOLD}  No terminales ={color.END} {brackets[0]} {",".join(grammar["noTerminals"])} {brackets[1]}\n{color.BOLD}  Terminales ={color.END} {brackets[0]} {",".join(grammar["terminals"])} {brackets[1]}\n{color.BOLD}  No terminal inicial ={color.END} {grammar["initialTerminal"][0]}\n{color.BOLD}  Producciones :{color.END}\n\n{break_line.join(map(productions_map, productions_dict.keys()))}\n\n{color.BOLD}{color.RED}  ⦿  Salir {color.END}\n')
+        f'\n{color.BOLD}  Nombre de la gramática tipo 2 :{color.END} {grammar_name}\n{color.BOLD}  No terminales ={color.END} {brackets[0]} {",".join(grammar["noTerminals"])} {brackets[1]}\n{color.BOLD}  Terminales ={color.END} {brackets[0]} {",".join(grammar["terminals"])} {brackets[1]}\n{color.BOLD}  No terminal inicial ={color.END} {grammar["initialNoTerminal"]}\n{color.BOLD}  Producciones :{color.END}\n\n{break_line.join(map(productions_map, productions_dict.keys()))}\n\n{color.BOLD}{color.RED}  ⦿  Salir {color.END}')
 
     # SALIR
     key = keyboard.read_key()
     if key == "enter":
         return True
+
+# MENSAJE DE ADVERTENCIA
+
+
+def are_empty_grammars(valid_grammars):
+    empty_len = len(valid_grammars.keys()) == 0
+
+    # MENSAJE DE ADVERTENCIA
+    if empty_len:
+        print(
+            f"\n{color.BOLD}{color.YELLOW}  ⚠️  No se ha cargado ninguna gramática valida.{color.END}")
+        keyboard.read_key()
+
+    return empty_len
