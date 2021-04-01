@@ -16,7 +16,7 @@ def get_automaton_from_grammar(grammar_dict, grammar_name):
     get_automaton_graph(grammar_dict, grammar_name)
 
     # GENERAR HTML
-    grammar_dict_to_HTML(grammar_dict, grammar_name)
+    grammar_dict_to_HTML(grammar_dict, f'AP_{grammar_name}')
 
     # MENSAJE DE OK
     print(f'{color.BOLD}{color.GREEN}  ✔️  Automata generado correctamente.{color.END}')

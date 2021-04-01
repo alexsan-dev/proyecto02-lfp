@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>AP_Grm1</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      body {
+        padding: 30px;
+        width: 100vw;
+        height: 100vh;
+        background: rgb(245, 245, 245);
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      @keyframes entry {
+        from {
+          transform: translateY(-50%) scale(0.7);
+        }
+        to {
+          transform: translateY(-50%) scale(1);
+        }
+      }
+
+      main {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) scale(1);
+        max-width: 100%;
+        height: max-content;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+        background: #fff;
+        animation: entry 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1;
+      }
+
+      main > #graph {
+        width: 800px;
+      }
+
+      main > #graph > img {
+        width: 100%;
+      }
+
+      main > #grammar_info {
+        position: absolute;
+        top: 33px;
+        left: 33px;
+      }
+
+      main > #grammar_info > h1 {
+        color: #333;
+      }
+
+      main > #grammar_info > ul {
+        margin-top: 10px;
+      }
+
+      main > #grammar_info > ul > li > p {
+        font-size: 1.2em;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="grammar_info">
+        <h1>Nombre: AP_Grm1</h1>
+        <ul>
+          <li>
+            <p>
+              <strong>Terminales = </strong><span>{ a, b, z }</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Alfabeto de pila = </strong
+              ><span>{ a, b, z, S, A, B, C, # }</span>
+            </p>
+          </li>
+          <li>
+            <p><strong>Estados = </strong><span>{ i, p, q, f }</span></p>
+          </li>
+          <li>
+            <p><strong>Estado inicial = </strong><span>{ i }</span></p>
+          </li>
+          <li>
+            <p><strong>Estado de aceptación = </strong><span>{ f }</span></p>
+          </li>
+        </ul>
+      </div>
+      <div id="graph">
+        <img src="./assets/AP_Grm1.dot.svg" alt="Digraph" />
+      </div>
+    </main>
+  </body>
+</html>
