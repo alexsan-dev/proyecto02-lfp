@@ -3,7 +3,7 @@ import json
 import keyboard
 
 # TOOLS
-from tools.automaton import get_automaton_from_grammar, get_automaton_route_from_grammar
+from tools.automaton import get_automaton_from_grammar, get_automaton_input_from_grammar
 from tools.grammars import print_grammar_info, are_empty_grammars
 from tools.dictionaries import dict_to_json, get_functions_dict
 from tools.menu import arrow_menu
@@ -70,11 +70,11 @@ def get_automaton():
 # GENERAR RECORRIDO
 
 
-def get_automaton_route():
+def get_automaton_file(template):
     # COMBINAR FUNCIONES
     def handle_automaton_route(grammar_name):
-        get_automaton_route_from_grammar(
-            valid_grammars[grammar_name], grammar_name)
+        get_automaton_input_from_grammar(template,
+                                         valid_grammars[grammar_name], grammar_name)
 
         # DICCIONARIO DE FUNCIONES
     functions_dict = get_functions_dict(
@@ -87,6 +87,16 @@ def get_automaton_route():
                    automatons.copy(), functions_dict)
 
 
+def get_automaton_route():
+    # GENERAR AUTOMATA
+    get_automaton_file('route')
+
+
+def get_automaton_table():
+    # GENERAR AUTOMATA
+    get_automaton_file('table')
+
+
 # INICIAR
 if __name__ == "__main__":
     # LOOP DE MENU
@@ -94,5 +104,6 @@ if __name__ == "__main__":
         "0": set_file,
         "1": show_grammars_info,
         "2": get_automaton,
-        "3": get_automaton_route
+        "3": get_automaton_route,
+        "4": get_automaton_table
     }, ["Esta opción permite cargar un archivo de entrada\n  con extensión .glc que contiene la información\n  de las gramáticas libres del contexto.", "Esta opción del menú deberá mostrar todos los\n  nombres de gramáticas que se encuentran\n  actualmente en el sistema para elegir una.", "Esta opción permite generar un autómata de pila\n  con respecto de alguna gramática independiente\n  del contexto previamente cargada.", "El usuario podrá elegir uno de los autómatas de\n  pila. Luego solicitará el ingreso de una cadena\n  de entrada para generar un recorrido animado.", "El usuario podrá elegir uno de los autómatas de\n  pila. Luego solicitará el ingreso de una cadena\n  de entrada para generar una tabla de resumen.", "Detiene totalmente la ejecución del programa, y\n  los datos temporales se perderán, a excepción\n  de los archivos de salida ya generados."], horizontal=True)

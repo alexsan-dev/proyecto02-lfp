@@ -17,9 +17,9 @@ def grammar_dict_to_HTML(grammar_dict, grammar_name):
     stream.close()
 
 
-def get_automaton_html_route(grammar_dict, grammar_name, word):
+def get_automaton_html(template, grammar_dict, grammar_name, word):
     # LEER LINEAS DE TEMPLATE
-    stream = open('./templates/route.html', encoding='utf-8')
+    stream = open(f'./templates/{template}.html', encoding='utf-8')
     lines = stream.read()
 
     # LEER AUTOMATA
@@ -33,7 +33,7 @@ def get_automaton_html_route(grammar_dict, grammar_name, word):
         '{{ grammar }}', str(grammar_dict)).replace("{{ word }}", word).replace("{{ svg }}", svg_lines)
 
     # ESCRIBIR
-    stream_write = open('./out/reports/route.html', 'w')
+    stream_write = open(f'./out/reports/{template}.html', 'w')
     stream_write.write(lines)
 
     # CERRAR

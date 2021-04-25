@@ -4,7 +4,7 @@ import os
 
 # FILES
 from files.graphviz import get_automaton_graph
-from files.html import grammar_dict_to_HTML, get_automaton_html_route
+from files.html import grammar_dict_to_HTML, get_automaton_html
 
 # TOOLS
 from tools.colors import color
@@ -25,7 +25,7 @@ def get_automaton_from_grammar(grammar_dict, grammar_name):
     keyboard.read_key()
 
 
-def get_automaton_route_from_grammar(grammar_dict, grammar_name):
+def get_automaton_input_from_grammar(template, grammar_dict, grammar_name):
     # LIMPIAR
     os.system('clear' if os.name == 'posix' else 'cls')
 
@@ -33,14 +33,13 @@ def get_automaton_route_from_grammar(grammar_dict, grammar_name):
     print(
         f'\n  {color.BOLD}Escribe una cadena para evaluar el automata: {color.END}')
 
-    # GLOBALES
-    word = ''
-
+    word = input('')
     while(True):
         word = input('')
         key = keyboard.read_key()
 
         # SALIR
         if key == 'enter':
-            get_automaton_html_route(grammar_dict, grammar_name, word)
+            print(word)
+            get_automaton_html(template, grammar_dict, grammar_name, word)
             break
