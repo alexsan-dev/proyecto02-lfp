@@ -1,5 +1,6 @@
 # IMPORTS
 import os
+import inspect
 import keyboard
 from .colors import color
 
@@ -87,7 +88,15 @@ def arrow_menu(title="Selecciona una opción:", options=[], actions={}, helpers=
 
         # SELECCIONAR
         if key == 'enter':
-            actions.get(str(current_option_index), lambda: None)()
+            # EJECUTAR FUNCION
+            func = actions.get(str(current_option_index), lambda: None)
+            func_info = inspect.getfullargspec(func)
+
+            # ENVIAR OPCION
+            if (len(func_info.args) == 1):
+                func(current_option_index)
+            else:
+                func()
 
             # SALIR
             if current_option_index == len_options - 1:

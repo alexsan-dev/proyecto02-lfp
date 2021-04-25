@@ -1,1 +1,1 @@
-{"Gramatica2": {"noTerminals": ["A", "B", "C", "D"], "terminals": ["0", "1"], "initialNoTerminal": "A", "productions": [{"entry": "A", "transitions": ["1", "B"]}, {"entry": "A", "transitions": ["0", "C"]}, {"entry": "B", "transitions": ["1", "A"]}, {"entry": "B", "transitions": ["0", "D"]}, {"entry": "C", "transitions": ["1", "D"]}, {"entry": "C", "transitions": ["0"]}, {"entry": "D", "transitions": ["1", "C"]}, {"entry": "C", "transitions": ["0", "A"]}, {"entry": "D", "transitions": ["0", "B"]}]}}
+{}

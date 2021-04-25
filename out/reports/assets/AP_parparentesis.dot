@@ -6,18 +6,15 @@ digraph G {
 	q [label=<<B>q</B>> fontsize=25 height=1.5 width=1.5]
 	f [label=<<B>f</B>> fontsize=25 height=1 shape=doublecircle width=1]
 	i -> p [label="λ,λ;#" fontsize=19]
-	p -> q [label="λ,λ;S" fontsize=19]
+	p -> q [label="λ,λ;A" fontsize=19]
 	q -> f [label="λ,#;λ" fontsize=19]
-	q -> q [label="λ,S;A
-λ,A;aAa
-λ,A;B
-λ,B;bBb
-λ,B;C
-λ,C;zC
-λ,C;$
+	q -> q [label="λ,A;B
+λ,B;((B))
+λ,B;1
+λ,B;0
 
-a,a;λ
-b,b;λ
-z,z;λ
-$,$;λ"]
+(,(;λ
+),);λ
+0,0;λ
+1,1;λ"]
 }

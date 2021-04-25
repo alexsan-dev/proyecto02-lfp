@@ -24,7 +24,7 @@ def parse_file(lines):
             grammars_names.append(line.strip())
 
         # NO TERMINALES ; TERMINALES ; TERMINAL INICIAL
-        if re.match("^\s*(\w[,;]+)+\w*\s*$", line):
+        if re.match("^\s*([^\s]+[,;]+)+\w*\s*$", line):
             symbols = line.split(";")
 
             # AGREGAR A DICCIONARIO
@@ -35,7 +35,7 @@ def parse_file(lines):
             }
 
         # PRODUCCIONES
-        if re.match("^\s*\w\-\>(\w\s*)+", line):
+        if re.match("^\s*[^\s]+\-\>([^\s]+\s*)+", line):
             order = line.split('->')
             current_name = grammars_names[current_grammar_index]
 
@@ -45,7 +45,7 @@ def parse_file(lines):
             productions.append({"entry": order[0], "transitions": transitions})
 
             # VERIFICAR SI ES LIBRE DE CONTEXTO
-            if len(transitions) == 3:
+            if len(transitions) >= 3:
                 is_context_free_grammar = True
 
             # AGREGAR A DICCIONARIO

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Recorrido</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Work Sans", sans-serif;
+      }
+
+      body {
+        padding: 30px;
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        background-image: url("./assets/background.png");
+        background-size: 170px;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.7;
+      }
+
+      main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: max-content;
+        display: grid;
+        grid-template-columns: 440px 800px;
+        grid-template-rows: auto auto;
+        column-gap: 30px;
+        row-gap: 30px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      svg {
+        max-width: 800px;
+        max-height: 383px;
+        object-fit: contain;
+        margin-top: -15px;
+        margin-bottom: -15px;
+        overflow: visible;
+      }
+
+      .setting {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .setting > p {
+        margin-right: 20px;
+        color: #333;
+      }
+
+      .setting > input {
+        cursor: pointer;
+      }
+
+      .setting:first-child > p {
+        width: 200px;
+      }
+
+      #automaton_info {
+        position: relative;
+        z-index: 2;
+        width: 440px;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+        justify-content: center;
+        align-items: center;
+        row-gap: 20px;
+        height: 100%;
+      }
+
+      #automaton_info > #automaton_info_intro > h1 {
+        margin-top: -10px;
+        color: #03a9f4;
+      }
+
+      #automaton_info > #automaton_info_intro > p {
+        color: #555;
+      }
+
+      #automaton_info > #automaton_settings {
+        position: relative;
+        padding: 20px;
+        background: #03a9f4;
+        width: 100%;
+        border-radius: 10px;
+        margin: 0;
+        --stateColor: #03a9f4;
+      }
+
+      #automaton_info > #automaton_settings > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      #automaton_info > #automaton_settings::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 99%;
+        height: 99%;
+        background-color: rgba(255, 255, 255, 0.97);
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        z-index: 1;
+      }
+
+      #automaton_info > #automaton_settings p {
+        color: rgba(0, 0, 0, 0.6);
+      }
+
+      #automaton_info > #automaton_settings input[type="range"] {
+        -webkit-appearance: none;
+        background: transparent;
+      }
+
+      #automaton_info > #automaton_settings .checkLabel {
+        position: relative;
+        width: 25px;
+        height: 25px;
+        border-radius: 5px;
+        border: 2px solid var(--stateColor);
+        cursor: pointer;
+        background: transparent;
+      }
+
+      #automaton_info > #automaton_settings .checkLabel::before {
+        content: "";
+        position: relative;
+        display: block;
+        top: 3px;
+        left: 3px;
+        height: 15px;
+        width: 15px;
+        transform: scale(0);
+        border-radius: 5px;
+        background-color: var(--stateColor);
+        transition: transform 0.1s ease-in-out;
+        z-index: 2;
+      }
+
+      #automaton_info > #automaton_settings input[type="checkbox"] {
+        display: none;
+      }
+
+      #automaton_info
+        > #automaton_settings
+        input[type="checkbox"]:checked
+        ~ .checkLabel::before {
+        transform: scale(1);
+      }
+
+      #automaton_info
+        > #automaton_settings
+        input[type="range"]:hover::-moz-range-thumb {
+        transform: scale(1.3);
+      }
+
+      #automaton_info
+        > #automaton_settings
+        input[type="range"]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        background: var(--stateColor);
+      }
+
+      #automaton_info
+        > #automaton_settings
+        input[type="range"]::-moz-range-track {
+        width: 100%;
+        height: 3px;
+        cursor: pointer;
+        box-shadow: none;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 1.3px;
+        border: none;
+      }
+
+      #automaton_info > #automaton_settings input[type="color"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        box-shadow: none;
+        border: none;
+        height: 30px;
+        width: 30px;
+      }
+
+      #automaton_info
+        > #automaton_settings
+        input[type="color"]::-moz-focus-inner,
+      #automaton_info
+        > #automaton_settings
+        input[type="color"]::-moz-color-swatch {
+        border: none;
+        border-radius: 50px;
+        background: transparent;
+      }
+
+      #automaton_info > #automaton_controls {
+        margin: 0 auto;
+        width: max-content;
+      }
+
+      #automaton_info > #automaton_controls > button {
+        appearance: none;
+        background: #03a9f4;
+        border-radius: 100%;
+        height: 60px;
+        width: 60px;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+        position: relative;
+      }
+
+      #automaton_info > #automaton_controls > button > img {
+        width: 100%;
+        filter: invert(100%) drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+      }
+
+      #automaton_info > #automaton_controls > button:first-child {
+        margin-right: -5px;
+      }
+
+      #automaton_info > #automaton_controls > button:nth-child(2) {
+        transform: scale(1.3) translateY(-2px);
+        border: 3px solid #fff;
+        z-index: 2;
+      }
+
+      #automaton_info > #automaton_controls > button:last-child {
+        margin-left: -5px;
+      }
+
+      #automaton_info > #automaton_controls > button:hover {
+        transform: scale(1.1);
+      }
+
+      #automaton_info > #automaton_controls > button:nth-child(2):hover {
+        transform: scale(1.5) translateY(-2px);
+      }
+
+      #automaton_info > #automaton_controls > button:first-child > img {
+        transform: scaleX(-1);
+      }
+
+      #automaton_entry_state {
+        position: relative;
+        grid-column: 1/3;
+      }
+
+      #automaton_entry_state > h2 {
+        margin-bottom: 10px;
+      }
+
+      #automaton_entry_state > span {
+        position: relative;
+        color: #333;
+        font-size: 3em;
+        padding: 0 10px;
+        font-weight: bold;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+        z-index: 2;
+      }
+
+      #automaton_entry_state > #slider {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        background: #03a9f4;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        transition: transform 0.2s ease-in-out;
+        z-index: 1;
+      }
+
+      #automaton_entry_state > span:first-of-type {
+        color: #fff;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      }
+
+      #automaton_entry_state > span.med_char {
+        font-size: 2em;
+        padding: 0 5px;
+      }
+      #automaton_entry_state > span.long_char {
+        font-size: 1.4em;
+        padding: 0 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="automaton_info">
+        <div id="automaton_info_intro">
+          <h1>Automata sumarnumeros</h1>
+          <p>
+            Aquí se puede ajustar el comportamiento del automata ademas de todos
+            los controles de animación.
+          </p>
+        </div>
+        <div id="automaton_settings">
+          <div class="setting">
+            <p>Ajustar velocidad: <span id="velocityText">(1.00s)</span></p>
+            <input type="range" id="velocity" value="100" min="100" max="500" />
+          </div>
+          <div class="setting">
+            <p>Terminar en estado aceptación:</p>
+            <input type="checkbox" id="acceptEnds" />
+            <label for="acceptEnds" class="checkLabel"></label>
+          </div>
+          <div class="setting">
+            <p>Mostrar transición activa:</p>
+            <input type="checkbox" id="showTransition" />
+            <label for="showTransition" class="checkLabel"></label>
+          </div>
+          <div class="setting">
+            <p>Color de estado activo:</p>
+            <input type="color" id="stateColor" value="#03a9f4" />
+          </div>
+        </div>
+        <div id="automaton_controls">
+          <button id="backBtn">
+            <img src="./assets/forward.png" alt="Prev Step" />
+          </button>
+          <button id="playBtn">
+            <img src="./assets/play.png" alt="Play" />
+          </button>
+          <button id="nextBtn">
+            <img src="./assets/forward.png" alt="Next Step" />
+          </button>
+        </div>
+      </div>
+      <!-- Title: G Pages: 1 -->
+<svg width="968pt" height="630pt"
+ viewBox="0.00 0.00 968.00 630.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 626)">
+<title>G</title>
+<polygon fill="transparent" stroke="transparent" points="-4,4 -4,-626 964,-626 964,4 -4,4"/>
+<!-- i -->
+<g id="node1" class="node">
+<title>i</title>
+<ellipse fill="none" stroke="#000000" cx="36" cy="-54" rx="36" ry="36"/>
+<text text-anchor="start" x="32.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">i</text>
+</g>
+<!-- p -->
+<g id="node2" class="node">
+<title>p</title>
+<ellipse fill="none" stroke="#000000" cx="187" cy="-54" rx="36" ry="36"/>
+<text text-anchor="start" x="179.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">p</text>
+</g>
+<!-- i&#45;&gt;p -->
+<g id="edge1" class="edge">
+<title>i&#45;&gt;p</title>
+<path fill="none" stroke="#000000" d="M72.1683,-54C92.731,-54 118.694,-54 140.729,-54"/>
+<polygon fill="#000000" stroke="#000000" points="140.8655,-57.5001 150.8655,-54 140.8654,-50.5001 140.8655,-57.5001"/>
+<text text-anchor="middle" x="111.5" y="-59.8" font-family="Times,serif" font-size="19.00" fill="#000000">λ,λ;#</text>
+</g>
+<!-- q -->
+<g id="node3" class="node">
+<title>q</title>
+<ellipse fill="none" stroke="#000000" cx="553" cy="-54" rx="54" ry="54"/>
+<text text-anchor="start" x="545.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">q</text>
+</g>
+<!-- p&#45;&gt;q -->
+<g id="edge2" class="edge">
+<title>p&#45;&gt;q</title>
+<path fill="none" stroke="#000000" d="M223.0951,-54C284.8842,-54 411.7074,-54 488.8577,-54"/>
+<polygon fill="#000000" stroke="#000000" points="488.9386,-57.5001 498.9385,-54 488.9385,-50.5001 488.9386,-57.5001"/>
+<text text-anchor="middle" x="264" y="-59.8" font-family="Times,serif" font-size="19.00" fill="#000000">λ,λ;A</text>
+</g>
+<!-- q&#45;&gt;q -->
+<g id="edge4" class="edge">
+<title>q&#45;&gt;q</title>
+<path fill="none" stroke="#000000" d="M506.6051,-81.7087C488.6581,-103.5696 504.123,-126 553,-126 595.3855,-126 612.6447,-109.132 604.7776,-90.3951"/>
+<polygon fill="#000000" stroke="#000000" points="607.6374,-88.3654 599.3949,-81.7087 601.6872,-92.0526 607.6374,-88.3654"/>
+<text text-anchor="middle" x="553" y="-610.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,A;B</text>
+<text text-anchor="middle" x="553" y="-595.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,B;sumar(N)</text>
+<text text-anchor="middle" x="553" y="-580.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,N;NUMERONP</text>
+<text text-anchor="middle" x="553" y="-565.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NP;:NUMERONP</text>
+<text text-anchor="middle" x="553" y="-550.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NP;$</text>
+<text text-anchor="middle" x="553" y="-535.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NUMERO;DNUMERO</text>
+<text text-anchor="middle" x="553" y="-520.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NUMERO;$</text>
+<text text-anchor="middle" x="553" y="-505.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;0</text>
+<text text-anchor="middle" x="553" y="-490.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;1</text>
+<text text-anchor="middle" x="553" y="-475.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;2</text>
+<text text-anchor="middle" x="553" y="-460.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;3</text>
+<text text-anchor="middle" x="553" y="-445.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;4</text>
+<text text-anchor="middle" x="553" y="-430.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;5</text>
+<text text-anchor="middle" x="553" y="-415.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;6</text>
+<text text-anchor="middle" x="553" y="-400.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;7</text>
+<text text-anchor="middle" x="553" y="-385.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;8</text>
+<text text-anchor="middle" x="553" y="-370.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;9</text>
+<text text-anchor="middle" x="553" y="-339.8" font-family="Times,serif" font-size="14.00" fill="#000000">sumar,sumar;λ</text>
+<text text-anchor="middle" x="553" y="-324.8" font-family="Times,serif" font-size="14.00" fill="#000000">(,(;λ</text>
+<text text-anchor="middle" x="553" y="-309.8" font-family="Times,serif" font-size="14.00" fill="#000000">),);λ</text>
+<text text-anchor="middle" x="553" y="-294.8" font-family="Times,serif" font-size="14.00" fill="#000000">:,:;λ</text>
+<text text-anchor="middle" x="553" y="-279.8" font-family="Times,serif" font-size="14.00" fill="#000000">0,0;λ</text>
+<text text-anchor="middle" x="553" y="-264.8" font-family="Times,serif" font-size="14.00" fill="#000000">1,1;λ</text>
+<text text-anchor="middle" x="553" y="-249.8" font-family="Times,serif" font-size="14.00" fill="#000000">2,2;λ</text>
+<text text-anchor="middle" x="553" y="-234.8" font-family="Times,serif" font-size="14.00" fill="#000000">3,3;λ</text>
+<text text-anchor="middle" x="553" y="-219.8" font-family="Times,serif" font-size="14.00" fill="#000000">4,4;λ</text>
+<text text-anchor="middle" x="553" y="-204.8" font-family="Times,serif" font-size="14.00" fill="#000000">5,5;λ</text>
+<text text-anchor="middle" x="553" y="-189.8" font-family="Times,serif" font-size="14.00" fill="#000000">6,6;λ</text>
+<text text-anchor="middle" x="553" y="-174.8" font-family="Times,serif" font-size="14.00" fill="#000000">7,7;λ</text>
+<text text-anchor="middle" x="553" y="-159.8" font-family="Times,serif" font-size="14.00" fill="#000000">8,8;λ</text>
+<text text-anchor="middle" x="553" y="-144.8" font-family="Times,serif" font-size="14.00" fill="#000000">9,9;λ</text>
+<text text-anchor="middle" x="553" y="-129.8" font-family="Times,serif" font-size="14.00" fill="#000000">$,$;λ</text>
+</g>
+<!-- f -->
+<g id="node4" class="node">
+<title>f</title>
+<ellipse fill="none" stroke="#000000" cx="920" cy="-54" rx="36" ry="36"/>
+<ellipse fill="none" stroke="#000000" cx="920" cy="-54" rx="40" ry="40"/>
+<text text-anchor="start" x="915.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">f</text>
+</g>
+<!-- q&#45;&gt;f -->
+<g id="edge3" class="edge">
+<title>q&#45;&gt;f</title>
+<path fill="none" stroke="#000000" d="M607.1521,-54C677.8928,-54 800.8153,-54 869.6339,-54"/>
+<polygon fill="#000000" stroke="#000000" points="869.7902,-57.5001 879.7901,-54 869.7901,-50.5001 869.7902,-57.5001"/>
+<text text-anchor="middle" x="840.5" y="-59.8" font-family="Times,serif" font-size="19.00" fill="#000000">λ,#;λ</text>
+</g>
+</g>
+</svg>
+
+      <div id="automaton_entry_state">
+        <h2>Entrada</h2>
+        <div id="slider"></div>
+      </div>
+    </main>
+  </body>
+  <script>
+    // GLOBALES
+    let grammar = {'noTerminals': ['A', 'B', 'N', 'NP', 'NUMERO', 'D'], 'terminals': ['sumar', '(', ')', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '$'], 'initialNoTerminal': 'A', 'productions': [{'entry': 'A', 'transitions': ['B']}, {'entry': 'B', 'transitions': ['sumar', '(', 'N', ')']}, {'entry': 'N', 'transitions': ['NUMERO', 'NP']}, {'entry': 'NP', 'transitions': [':', 'NUMERO', 'NP']}, {'entry': 'NP', 'transitions': ['$']}, {'entry': 'NUMERO', 'transitions': ['D', 'NUMERO']}, {'entry': 'NUMERO', 'transitions': ['$']}, {'entry': 'D', 'transitions': ['0']}, {'entry': 'D', 'transitions': ['1']}, {'entry': 'D', 'transitions': ['2']}, {'entry': 'D', 'transitions': ['3']}, {'entry': 'D', 'transitions': ['4']}, {'entry': 'D', 'transitions': ['5']}, {'entry': 'D', 'transitions': ['6']}, {'entry': 'D', 'transitions': ['7']}, {'entry': 'D', 'transitions': ['8']}, {'entry': 'D', 'transitions': ['9']}]}
+    let grammarName = "sumarnumeros";
+    let word = "sumar(5:9:2)";
+    let mainStack = [];
+    let currentCharIndex = 0;
+    let sliderSpace = 0;
+
+    // ELEMENTOS
+    const automatonEntryContainer = document.getElementById(
+      "automaton_entry_state"
+    );
+    const velocityRange = document.getElementById("velocity");
+    const velocityText = document.getElementById("velocityText");
+    const acceptEndsInput = document.getElementById("acceptEnds");
+    const showTransitionInput = document.getElementById("showTransition");
+    const automatonSettings = document.getElementById("automaton_settings");
+    const automatonInfoIntro = document.querySelector(
+      "#automaton_info_intro > h1"
+    );
+    const stateColorInput = document.getElementById("stateColor");
+    const entrySlider = document.getElementById("slider");
+    const playBtn = document.getElementById("playBtn");
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const edges = document.querySelectorAll(".edge");
+    const nodes = document.querySelectorAll(".node");
+
+    // SEPARAR PALABRAS
+    let wordTokenIndex = [];
+    let tmpWord = word;
+    for (
+      let terminalsIndex = 0, terminalsLength = word.length;
+      terminalsIndex < terminalsLength;
+      terminalsIndex++
+    ) {
+      grammar.terminals
+        .map(terminal => terminal.trim())
+        .forEach(terminal => {
+          const indexOf = tmpWord.indexOf(terminal);
+          if (indexOf !== -1 && (tmpWord[indexOf - 1] ? tmpWord[indexOf - 1].includes('^') : true)) {
+            wordTokenIndex.push(indexOf);
+            tmpWord = tmpWord.replace(terminal, "^".repeat(terminal.length));
+          }
+        });
+    }
+
+    wordTokenIndex = wordTokenIndex.sort((a, b) => a - b)
+    const wordTokens = wordTokenIndex.map((tokenIndex, index) =>
+      word.substring(tokenIndex, wordTokenIndex[index + 1] || undefined)
+    );
+
+    console.log(wordTokens);
+
+    // AGREGAR ENTRADAS
+    word.split("").forEach(char => {
+      // CREAR CARÁCTER
+      const span = document.createElement("span");
+      span.textContent = char;
+
+      // AGREGAR
+      automatonEntryContainer.appendChild(span);
+    });
+
+    // CAMBIAR SLIDER DE ENTRADAS
+    setTimeout(() => {
+      entrySlider.style.top =
+        automatonEntryContainer.childNodes[6].offsetTop + "px";
+      entrySlider.style.height =
+        automatonEntryContainer.childNodes[6].scrollHeight + 8 + "px";
+
+      // ANCHO
+      sliderSpace = automatonEntryContainer.childNodes[6].scrollWidth + 2;
+      entrySlider.style.width = sliderSpace + "px";
+    }, 100);
+
+    // ESTILOS
+    const spans = document.querySelectorAll("#automaton_entry_state > span");
+    spans.forEach(span =>
+      span.classList.add(
+        word.length >= 18
+          ? word.length >= 27
+            ? "long_char"
+            : "med_char"
+          : "normal_char"
+      )
+    );
+
+    // TRANSICIONES DE NODES Y EDGE
+    nodes.forEach(node => {
+      node.childNodes[3].style.transition =
+        "stroke 0.2s ease-in-out, fill 0.2s ease-in-out, rx 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), ry 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+      node.childNodes[3].style.fill = "transparent";
+    });
+    edges.forEach(edge => {
+      edge.childNodes[edge.childNodes.length - 2].style.transition =
+        "stroke 0.2s ease-in-out, fill 0.2s ease-in-out";
+    });
+
+    // CONFIGURACIONES
+    let velocity = 1;
+    let acceptEnds = false;
+    let showTransition = false;
+    let stateColor = "#03a9f4";
+    let paused = true;
+    let step = -1;
+    let usedProductions = [];
+    let stepProductions = 0;
+
+    // EVENTOS
+    velocityRange.addEventListener("input", ev => {
+      velocityText.textContent = `(${(parseInt(ev.target.value) / 100).toFixed(
+        2
+      )}s)`;
+      velocity = parseInt(ev.target.value) / 100;
+    });
+
+    acceptEndsInput.addEventListener(
+      "change",
+      ev => (acceptEnds = ev.target.checked)
+    );
+    showTransitionInput.addEventListener(
+      "change",
+      ev => (showTransition = ev.target.checked)
+    );
+    stateColorInput.addEventListener(
+      "input",
+      ev => (stateColor = ev.target.value)
+    );
+
+    // LOOP PRINCIPAL
+    const mainLoop = () =>
+      setTimeout(() => {
+        if (!paused) {
+          if (!acceptEnds) {
+            if (!(step > 0 && mainStack.length === 0)) mainAnimations();
+            else {
+              paused = true;
+              togglePlayBtn();
+            }
+          } else mainAnimations();
+        }
+      }, velocity * 1000);
+
+    // ANIMACIÓN PRINCIPAL
+    const mainAnimations = (selfControl = true) => {
+      // ANIMAR ESTADOS
+      setActiveState();
+      setActiveEdge();
+      setActiveEntry();
+      setControlsColors();
+
+      // RECURSION
+      if (selfControl) step++;
+      if (!paused) mainLoop();
+    };
+
+    // COLOR DE CONTROLES
+    const setControlsColors = () => {
+      playBtn.style.backgroundColor = stateColor;
+      nextBtn.style.backgroundColor = stateColor;
+      backBtn.style.backgroundColor = stateColor;
+      automatonSettings.style.backgroundColor = stateColor;
+      automatonSettings.style.setProperty("--stateColor", stateColor);
+      automatonInfoIntro.style.color = stateColor;
+    };
+
+    // ACTIVAR ENTRADA
+    const setActiveEntry = () => {
+      // REINICIAR
+      automatonEntryContainer.childNodes.forEach((child, index) => {
+        if (child.tagName === "SPAN") {
+          child.style.color = "#333";
+          child.style.textShadow = "none";
+        }
+      });
+
+      // SPAN ACTIVO
+      const currentSpan =
+        automatonEntryContainer.childNodes[
+          currentCharIndex === 0 ? 5 : currentCharIndex + 4
+        ];
+
+      if (currentSpan && "style" in currentSpan) {
+        currentSpan.style.color = "#fff";
+        currentSpan.style.textShadow = "0 0 3px rgba(0,0,0,.5)";
+      }
+
+      // MOVER SLIDER
+      entrySlider.style.background = stateColor;
+      entrySlider.style.transform = `translateX(${sliderSpace *
+        Math.min(wordTokens.length, Math.max(0, currentCharIndex - 1))}px)`;
+    };
+
+    // ACTIVAR ESTADO
+    const setActiveState = () => {
+      let nodeIndex = -1;
+
+      // BORRAR TODOS
+      nodes.forEach((node, index) => {
+        const text = node.childNodes[node.childNodes.length - 2];
+        const circle = node.childNodes[3];
+
+        circle.style.fill = "transparent";
+        circle.style.stroke = "#000";
+        circle.setAttribute("rx", index !== 2 ? "36" : "54");
+        circle.setAttribute("ry", index !== 2 ? "36" : "54");
+
+        // CSS TEXTO
+        text.style.fill = "#000";
+        text.style.fontSize = "25px";
+        text.style.textShadow = "none";
+      });
+
+      // ESTADOS
+      if (step < 3) nodeIndex = step;
+      else if (mainStack.length === 0 && acceptEnds) {
+        nodeIndex = step - (stepProductions + 2) + 2;
+        if (nodeIndex >= 3) {
+          paused = true;
+          togglePlayBtn();
+        }
+      } else {
+        nodeIndex = 2;
+      }
+
+      // ESTILOS
+      if (nodeIndex > -1) {
+        // TEXTO
+        const text = nodes[nodeIndex]
+          ? nodes[nodeIndex].childNodes[nodes[nodeIndex].childNodes.length - 2]
+          : undefined;
+        const circle = nodes[nodeIndex]
+          ? nodes[nodeIndex].childNodes[3]
+          : undefined;
+
+        if (text && circle && "style" in text && "style" in circle) {
+          // CSS
+          circle.style.fill = stateColor;
+          circle.style.stroke = stateColor;
+          circle.setAttribute("rx", nodeIndex !== 2 ? "43" : "61");
+          circle.setAttribute("ry", nodeIndex !== 2 ? "43" : "61");
+
+          text.style.fill = "#fff";
+          text.style.textShadow = "0 0 3px rgba(0,0,0,.5)";
+        }
+      }
+    };
+
+    // ACTIVAR ARISTA
+    const setActiveEdge = () => {
+      let edgeIndex = -1;
+      let subEdgeIndex = -1;
+
+      // BORRAR TODOS
+      edges.forEach(edge => {
+        edge.childNodes.forEach((text, index) => {
+          if (index > 6 && "style" in text) {
+            text.style.fill = "#000";
+            text.style.fontWeight = "normal";
+          }
+        });
+      });
+
+      // AGREGAR A STACK
+      if (step === 0) mainStack = ["#"];
+      if (step === 1) mainStack = ["#", grammar.initialNoTerminal];
+
+      // ESTADOS
+      if (step < 2) edgeIndex = step;
+      else {
+        if (mainStack[mainStack.length - 1] !== "#" && mainStack.length > 0) {
+          // VALIDAR
+          let hasProduction = false;
+          edgeIndex = 2;
+
+          // PRODUCCIONES POSIBLES
+          let posibleProductions = [];
+
+          // BUSCAR PRODUCCIONES CERCA DEL STACK
+          for (
+            let prIndex = 0, length = grammar.productions.length;
+            prIndex < length;
+            prIndex++
+          )
+            if (
+              grammar.productions[prIndex].entry ===
+                mainStack[mainStack.length - 1] &&
+              !usedProductions.find(usedIndex => prIndex === usedIndex)
+            ) {
+              posibleProductions.push({
+                ...grammar.productions[prIndex],
+                index: prIndex,
+                transitions: grammar.productions[prIndex].transitions.filter(
+                  transition => transition !== "λ" && transition !== ""
+                )
+              });
+            }
+
+          // VALIDAR POSIBLES PRODUCCIONES
+          const setPosibleProduction = (production, isRecursive = false) => {
+            // AGREGAR A PRODUCTION USADA
+            if (!isRecursive) usedProductions.push(production.index);
+
+            // REMOVER  X
+            mainStack.pop();
+
+            // AGREGAR PRODUCTION
+            mainStack = [
+              ...mainStack,
+              ...[...production.transitions].reverse()
+            ];
+
+            // CAMBIAR ESTADO
+            edges[2].childNodes.forEach((child, index) => {
+              const textContent = child.textContent.trim();
+              if (
+                textContent.includes(
+                  `λ,${production.entry};${[...production.transitions].join(
+                    ""
+                  )}`
+                )
+              )
+                subEdgeIndex = index;
+            });
+
+            hasProduction = true;
+          };
+
+          let terminalRelevantIndex = -1;
+          for (
+            let pIndex = 0, pLength = posibleProductions.length;
+            pIndex < pLength;
+            pIndex++
+          )
+            if (
+              wordTokens[currentCharIndex] ===
+              posibleProductions[pIndex].transitions[
+                posibleProductions[pIndex].transitions.length - 1
+              ]
+            )
+              terminalRelevantIndex = pIndex;
+
+          // APLICAR POSIBLE PRODUCCIÓN CERCA DE LA ENTRADA
+          if (terminalRelevantIndex !== -1) {
+            setPosibleProduction(posibleProductions[terminalRelevantIndex]);
+          } else {
+            // BUSCAR POSIBLES PRODUCCIONES RECURSIVAS
+            const recursivePosibleProductions = posibleProductions
+              .map(production => {
+                const hasNoTerminal = production.transitions
+                  .map(token => grammar.noTerminals.includes(token))
+                  .some(token => token === true);
+
+                // PRODUCCIÓN CON NO
+                if (
+                  hasNoTerminal &&
+                  production.transitions.includes(production.entry)
+                )
+                  return production;
+                else return false;
+              })
+              .filter(Boolean);
+
+            // APLICAR POSIBLES PRODUCCIONES RECURSIVAS
+            let validRecursive = false;
+            let usedRecursiveProductionIndex = -1
+            if (recursivePosibleProductions.length > 0)
+              recursivePosibleProductions.forEach(production => {
+                // AMIBUEDAD
+                const hasNextRecursive = grammar.productions.some(
+                  gProduction => {
+                    if (production.transitions.includes(gProduction.entry)) {
+                      return (
+                        gProduction.transitions[0] ===
+                        wordTokens[currentCharIndex]
+                      );
+                    } else return false;
+                  }
+                );
+                if (
+                  hasNextRecursive ||
+                  production.transitions[0] === wordTokens[currentCharIndex]
+                ) {
+                  validRecursive = true;
+                  setPosibleProduction(production, true);
+                } else usedRecursiveProductionIndex = production.index
+              });
+
+            // SI NO SE ENCONTRARON APLICAR PRODUCCIONES EN ORDEN
+            if (!validRecursive) {
+              posibleProductions.forEach(production => {
+                if (
+                  !usedProductions.find(
+                    usedIndex => production.index === usedIndex
+                  ) && usedRecursiveProductionIndex !== production.index
+                ) {
+                  if (production.transitions.length === 1) {
+                    if (grammar.terminals.includes(production.transitions[0])) {
+                      setPosibleProduction(production, true);
+                      wordTokens.splice(
+                        currentCharIndex,
+                        0,
+                        production.transitions[0]
+                      );
+                    } else {
+                      setPosibleProduction(production);
+                    }
+                  } else {
+                    setPosibleProduction(production);
+                  }
+                }
+              });
+            }
+          }
+          // LEER ENTRADA
+          if (!hasProduction) {
+            for (
+              let grIndex = 0, grLength = grammar.terminals.length;
+              grIndex < grLength;
+              grIndex++
+            ) {
+              if (wordTokens[currentCharIndex] === grammar.terminals[grIndex]) {
+                currentCharIndex++;
+
+                if (
+                  mainStack[mainStack.length - 1] === grammar.terminals[grIndex]
+                ) {
+                  mainStack.pop();
+
+                  // BUSCAR PRODUCCIÓN
+                  edges[2].childNodes.forEach((child, index) => {
+                    const textContent = child.textContent.trim();
+                    if (
+                      textContent.includes(
+                        `${grammar.terminals[grIndex]},${grammar.terminals[grIndex]};λ`
+                      )
+                    )
+                      subEdgeIndex = index;
+                  });
+                }
+                break;
+              }
+            }
+          }
+
+          stepProductions++;
+        } else {
+          edgeIndex = step - (stepProductions + 2) + 3;
+          mainStack = [];
+        }
+      }
+
+      // FILTRAR STACK
+      mainStack = mainStack.filter(item => item.length > 0 && item !== "λ");
+
+      // ESTILOS
+      if (edgeIndex > -1) {
+        // EDGE
+        const currentEdge = edges[edgeIndex]
+          ? edges[edgeIndex].childNodes[
+              subEdgeIndex > -1
+                ? subEdgeIndex
+                : edges[edgeIndex].childNodes.length - 2
+            ]
+          : undefined;
+
+        // CSS
+        if (currentEdge && "style" in currentEdge) {
+          currentEdge.style.fill = stateColor;
+          currentEdge.style.fontWeight = "bold";
+        }
+      }
+
+      console.log(mainStack);
+    };
+
+    // CAMBIAR ICONO DE PAUSA/PLAY
+    const togglePlayBtn = () =>
+      playBtn.firstElementChild.setAttribute(
+        "src",
+        `./assets/${paused ? "play" : "pause"}.png`
+      );
+
+    // CONTROL DE REGRESAR/AVANZAR
+    const nextOrBack = (goBack = false) => {
+      // DETENER Y ANIMAR
+      let prevPaused = paused;
+      paused = true;
+      togglePlayBtn();
+
+      // CAMBIAR PASO
+      step = goBack
+        ? Math.max(0, step - (prevPaused ? 1 : 2))
+        : step + (prevPaused ? 1 : 0);
+      mainAnimations(false);
+    };
+
+    // ---- CONTROLES ----
+
+    // INICIAR O PARAR LOOP
+    playBtn.addEventListener("click", () => {
+      paused = !paused;
+      togglePlayBtn();
+
+      // INICIAR
+      if (!paused) mainAnimations();
+    });
+
+    // REGRESAR AVANZAR
+    backBtn.addEventListener("click", () => nextOrBack(true));
+    nextBtn.addEventListener("click", () => nextOrBack());
+  </script>
+</html>

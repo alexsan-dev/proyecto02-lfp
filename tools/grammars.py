@@ -34,8 +34,6 @@ def print_grammar_info(grammar, grammar_name):
 
     # SALIR
     key = keyboard.read_key()
-    if key == "enter":
-        return True
 
 # MENSAJE DE ADVERTENCIA
 

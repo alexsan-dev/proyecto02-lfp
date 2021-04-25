@@ -54,7 +54,8 @@ def get_automaton():
     # COMBINAR FUNCIONES
     def handle_automaton(grammar_dict, grammar_name):
         get_automaton_from_grammar(grammar_dict, grammar_name)
-        automatons.append(grammar_name)
+        if not grammar_name in automatons:
+            automatons.append(grammar_name)
 
     # DICCIONARIO DE FUNCIONES
     functions_dict = get_functions_dict(
@@ -75,14 +76,15 @@ def get_automaton_route():
         get_automaton_route_from_grammar(
             valid_grammars[grammar_name], grammar_name)
 
-    # DICCIONARIO DE FUNCIONES
+        # DICCIONARIO DE FUNCIONES
     functions_dict = get_functions_dict(
         automatons, handle_automaton_route, is_list=True)
 
     # MENSAJE DE ADVERTENCIA
     if not are_empty_grammars(automatons, is_list=True, custom_warn='No se ha cargado ningún automata.'):
         # MENU CON CON GRAMÁTICAS
-        arrow_menu("Selecciona un automata:", automatons, functions_dict)
+        arrow_menu("Selecciona un automata:",
+                   automatons.copy(), functions_dict)
 
 
 # INICIAR
