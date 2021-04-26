@@ -150,17 +150,7 @@
     const tableHeader = document.getElementById("tableHeader");
 
     // GLOBALES
-    let grammar = {
-      noTerminals: ["A", "B", "C"],
-      terminals: ["a", "b"],
-      initialNoTerminal: "A",
-      productions: [
-        { entry: "A", transitions: ["B"] },
-        { entry: "B", transitions: ["a", "C"] },
-        { entry: "C", transitions: ["a", "C", "b", "b"] },
-        { entry: "C", transitions: ["b", "b"] }
-      ]
-    };
+    let grammar = {'noTerminals': ['A', 'B', 'C'], 'terminals': ['a', 'b'], 'initialNoTerminal': 'A', 'productions': [{'entry': 'A', 'transitions': ['B']}, {'entry': 'B', 'transitions': ['a', 'C']}, {'entry': 'C', 'transitions': ['a', 'C', 'b', 'b']}, {'entry': 'C', 'transitions': ['b', 'b']}]}
     let grammarName = "abb";
     let word = "aabbbb";
     let mainStack = [];
