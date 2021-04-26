@@ -23,7 +23,7 @@ valid_grammars = {}
 
 def set_file():
     # PARSEAR ARCHIVO
-    main_file = file_reader(is_dev=True)
+    main_file = file_reader(is_dev=False)
     main_dict = parse_file(main_file)
 
     # GRAMÁTICAS

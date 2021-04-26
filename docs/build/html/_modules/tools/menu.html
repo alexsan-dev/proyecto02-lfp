@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tools.menu &#8212; Proyecto02 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for tools.menu</h1><div class="highlight"><pre>
+<span></span><span class="c1"># IMPORTS</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">import</span> <span class="nn">keyboard</span>
+<span class="kn">from</span> <span class="nn">.colors</span> <span class="k">import</span> <span class="n">color</span>
+
+<span class="c1"># OPCIÓN ACTUAL</span>
+<span class="n">current_option_index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">is_pressed</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># HABILITAR MOVIMIENTOS</span>
+
+
+<div class="viewcode-block" id="press_key"><a class="viewcode-back" href="../../index.html#tools.menu.press_key">[docs]</a><span class="k">def</span> <span class="nf">press_key</span><span class="p">(</span><span class="n">pressed</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Validar si se presiona tecla</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pressed ([type]): [description]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">is_pressed</span>
+    <span class="n">is_pressed</span> <span class="o">=</span> <span class="n">pressed</span></div>
+
+<span class="c1"># NAVEGAR EN EL MENU</span>
+
+
+<div class="viewcode-block" id="navigate"><a class="viewcode-back" href="../../index.html#tools.menu.navigate">[docs]</a><span class="k">def</span> <span class="nf">navigate</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">len_options</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Navegación con flechas para menus</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        key (str): Opción</span>
+<span class="sd">        len_options (list): Arreglo de opciones</span>
+<span class="sd">        horizontal (bool): Es un menu horizontal</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">is_pressed</span>
+    <span class="k">global</span> <span class="n">current_option_index</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_pressed</span><span class="p">:</span>
+        <span class="c1"># SUBIR</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="p">(</span><span class="s1">&#39;down&#39;</span> <span class="k">if</span> <span class="n">horizontal</span> <span class="k">else</span> <span class="s1">&#39;up&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_option_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">current_option_index</span> <span class="o">=</span> <span class="n">len_options</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_option_index</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="c1"># BAJAR</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="p">(</span><span class="s1">&#39;up&#39;</span> <span class="k">if</span> <span class="n">horizontal</span> <span class="k">else</span> <span class="s1">&#39;down&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_option_index</span> <span class="o">==</span> <span class="n">len_options</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">current_option_index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_option_index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># EVITAR QUE SE PRESIONE</span>
+    <span class="n">is_pressed</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<span class="c1"># MENU DE FLECHAS</span>
+
+
+<div class="viewcode-block" id="arrow_menu"><a class="viewcode-back" href="../../index.html#tools.menu.arrow_menu">[docs]</a><span class="k">def</span> <span class="nf">arrow_menu</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Selecciona una opción:&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">[],</span> <span class="n">actions</span><span class="o">=</span><span class="p">{},</span> <span class="n">helpers</span><span class="o">=</span><span class="p">[],</span> <span class="n">on_exit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">horizontal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Desplegá un menu horizontal o vertical seleccionable con flechas</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        title (str, optional): Titulo de menu. Defaults to &quot;Selecciona una opción:&quot;.</span>
+<span class="sd">        options (list, optional): Opciones de lista. Defaults to [].</span>
+<span class="sd">        actions (dict, optional): Acciones de lista. Defaults to {}.</span>
+<span class="sd">        helpers (list, optional): Mensajes de ayuda. Defaults to [].</span>
+<span class="sd">        on_exit ([type], optional): Funcion al salir. Defaults to None.</span>
+<span class="sd">        horizontal (bool, optional): Es un menu horizontal. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        [type]: [description]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># GLOBALES</span>
+    <span class="k">global</span> <span class="n">current_option_index</span>
+    <span class="k">global</span> <span class="n">is_pressed</span>
+
+    <span class="c1"># AGREGAR EVENTOS</span>
+    <span class="n">keyboard</span><span class="o">.</span><span class="n">on_release</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">press_key</span><span class="p">(</span><span class="kc">False</span><span class="p">),</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># AGREGAR EVENTO DE SALIDA</span>
+    <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Salir&quot;</span><span class="p">)</span>
+
+    <span class="c1"># SEPARADOR Y CONFIGURACIONES</span>
+    <span class="n">break_line</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">len_options</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="n">current_option_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># MAPA DE MENU</span>
+    <span class="k">def</span> <span class="nf">menu_map</span><span class="p">(</span><span class="n">enum</span><span class="p">):</span>
+        <span class="c1"># GLOBALES</span>
+        <span class="n">is_current_option</span> <span class="o">=</span> <span class="n">enum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">current_option_index</span>
+
+        <span class="c1"># STRING DE SALIDA</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;{color.BOLD + color.BLUE if is_current_option else color.END}{color.RED if enum[0] == len_options - 1 and is_current_option else &quot;&quot;}{&quot;&quot; if horizontal else &quot;  &quot;}{&quot;⦿  &quot; if is_current_option else &quot;• &quot;}</span><span class="si">{enum[1]}{color.END}</span><span class="s1">&#39;</span>
+
+    <span class="c1"># LOOP</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># LIMPIAR</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;posix&#39;</span> <span class="k">else</span> <span class="s1">&#39;cls&#39;</span><span class="p">)</span>
+
+        <span class="c1"># TEXTOS DE MENU</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot; │ &quot;</span> <span class="k">if</span> <span class="n">horizontal</span> <span class="k">else</span> <span class="n">break_line</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="n">menu_map</span><span class="p">,</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">options</span><span class="p">)))</span>
+        <span class="n">hr</span> <span class="o">=</span> <span class="s2">&quot;–&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">51</span> <span class="k">if</span> <span class="n">current_option_index</span> <span class="o">&lt;</span>
+                    <span class="n">len_options</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">56</span><span class="p">))</span>
+
+        <span class="c1"># IMPRIMIR</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="n">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">  ℹ️  </span><span class="si">{color.BOLD}{color.UNDERLINE}{title}</span><span class="se">\n</span><span class="si">{color.END}</span><span class="s1">  Puedes usar las flechas de tu</span><span class="si">{break_line}</span><span class="s1">  teclado para moverte, despues</span><span class="si">{break_line}</span><span class="s1">  presiona ENTER para seleccionar.</span><span class="si">{break_line}{break_line}</span><span class="s1">{f&quot;  ○</span><span class="si">{hr}</span><span class="s1">○&quot; if horizontal else &quot;&quot;}{break_line if horizontal else &quot;&quot;}{&quot;  │ &quot; if horizontal else &quot;&quot;}</span><span class="si">{header}</span><span class="s1">{&quot; │&quot; if horizontal else &quot;&quot;}{f&quot;</span><span class="si">{break_line}</span><span class="s1">  ○</span><span class="si">{hr}</span><span class="s1">○&quot; if horizontal else &quot;&quot;}{f&quot;</span><span class="si">{break_line}{break_line}</span><span class="s1">&quot; if horizontal else &quot;&quot;}  {helpers[current_option_index] if len(helpers) &gt; current_option_index else &quot;&quot;}&#39;</span><span class="p">)</span>
+
+        <span class="c1"># ESPERAR ENTRADA</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">read_key</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">navigate</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">len_options</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">)</span>
+
+        <span class="c1"># SELECCIONAR</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;enter&#39;</span><span class="p">:</span>
+            <span class="c1"># EJECUTAR FUNCION</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="n">actions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">current_option_index</span><span class="p">),</span> <span class="k">lambda</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">func_info</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+
+            <span class="c1"># ENVIAR OPCION</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">func_info</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">func</span><span class="p">(</span><span class="n">current_option_index</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func</span><span class="p">()</span>
+
+            <span class="c1"># SALIR</span>
+            <span class="k">if</span> <span class="n">current_option_index</span> <span class="o">==</span> <span class="n">len_options</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">current_option_index</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">break</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alex Santos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

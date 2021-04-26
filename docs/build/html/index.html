@@ -1,0 +1,281 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome to Proyecto02’s documentation! &#8212; Proyecto02 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-main">
+<span id="welcome-to-proyecto02-s-documentation"></span><h1>Welcome to Proyecto02’s documentation!<a class="headerlink" href="#module-main" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="main.get_automaton_file">
+<code class="descclassname">main.</code><code class="descname">get_automaton_file</code><span class="sig-paren">(</span><em>template</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/main.html#get_automaton_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#main.get_automaton_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genera un archivo html con un automata</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>template (str): Tipo de html, recorrido o tabla</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-files.graphviz"></span><dl class="function">
+<dt id="files.graphviz.get_automaton_graph">
+<code class="descclassname">files.graphviz.</code><code class="descname">get_automaton_graph</code><span class="sig-paren">(</span><em>grammar_dict</em>, <em>grammar_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/files/graphviz.html#get_automaton_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#files.graphviz.get_automaton_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crea un svg utilizando Graphviz</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>grammar_dict (dict): Diccionario de gramática
+grammar_name (str): Nombre de gramática</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-files.html"></span><dl class="function">
+<dt id="files.html.get_automaton_html">
+<code class="descclassname">files.html.</code><code class="descname">get_automaton_html</code><span class="sig-paren">(</span><em>template</em>, <em>grammar_dict</em>, <em>grammar_name</em>, <em>word</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/files/html.html#get_automaton_html"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#files.html.get_automaton_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genera un automata o tabla, con el template básico y la gramática.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>template (str): Tipo de html, recorrido o tabla
+grammar_dict (dict): Diccionario de gramática
+grammar_name (str): Nombre de gramática
+word (str): Expresion a evaluar por gramática</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="files.html.grammar_dict_to_HTML">
+<code class="descclassname">files.html.</code><code class="descname">grammar_dict_to_HTML</code><span class="sig-paren">(</span><em>grammar_dict</em>, <em>grammar_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/files/html.html#grammar_dict_to_HTML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#files.html.grammar_dict_to_HTML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Diccionario a html, crea un template básico</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>grammar_dict (dict): Diccionario de gramática
+grammar_name (str): Nombre de gramática</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-files.parser"></span><dl class="function">
+<dt id="files.parser.parse_file">
+<code class="descclassname">files.parser.</code><code class="descname">parse_file</code><span class="sig-paren">(</span><em>lines</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/files/parser.html#parse_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#files.parser.parse_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convertir archivo glc a diccionario</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>lines (str): Contenido del archivo</dd>
+<dt>Returns:</dt>
+<dd>dict: Diccionario de gramática</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-files.reader"></span><dl class="function">
+<dt id="files.reader.file_reader">
+<code class="descclassname">files.reader.</code><code class="descname">file_reader</code><span class="sig-paren">(</span><em>is_dev=False</em>, <em>dev_path='./test.glc'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/files/reader.html#file_reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#files.reader.file_reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lee un archivo .glc</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>is_dev (bool, optional): Modo desarrollo, deshabilita Tkinter. Defaults to False.
+dev_path (str, optional): Ruta de desarrollo. Defaults to ‘./test.glc’.</dd>
+<dt>Returns:</dt>
+<dd>str: Archivo como texto</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-tools.automaton"></span><dl class="function">
+<dt id="tools.automaton.get_automaton_from_grammar">
+<code class="descclassname">tools.automaton.</code><code class="descname">get_automaton_from_grammar</code><span class="sig-paren">(</span><em>grammar_dict</em>, <em>grammar_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/automaton.html#get_automaton_from_grammar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.automaton.get_automaton_from_grammar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genera un archivo svg y html de la gramática y genera el template inicial</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>grammar_dict (dict): Diccionario de gramática
+grammar_name (str): Nombre de gramática</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.automaton.get_automaton_input_from_grammar">
+<code class="descclassname">tools.automaton.</code><code class="descname">get_automaton_input_from_grammar</code><span class="sig-paren">(</span><em>template</em>, <em>grammar_dict</em>, <em>grammar_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/automaton.html#get_automaton_input_from_grammar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.automaton.get_automaton_input_from_grammar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtiene una expresion a evaluar y la convierte en un html</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>template (str): Tipo de html, recorrido o tabla
+grammar_dict (dict): Diccionario de gramática
+grammar_name (str): Nombre de gramática</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-tools.colors"></span><span class="target" id="module-tools.dictionaries"></span><dl class="function">
+<dt id="tools.dictionaries.dict_to_json">
+<code class="descclassname">tools.dictionaries.</code><code class="descname">dict_to_json</code><span class="sig-paren">(</span><em>file_dict</em>, <em>pathname</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/dictionaries.html#dict_to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.dictionaries.dict_to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crear diccionario a archivo JSON</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file_dict (dict): Diccionario a convertir
+pathname (str): Ruta a guardar</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.dictionaries.get_functions_dict">
+<code class="descclassname">tools.dictionaries.</code><code class="descname">get_functions_dict</code><span class="sig-paren">(</span><em>main_dict</em>, <em>function</em>, <em>is_list=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/dictionaries.html#get_functions_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.dictionaries.get_functions_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crea un diccionario de funciones.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>main_dict (dict): diccionario de gramáticas
+function (function): callback
+is_list (bool, optional): verifica si es una lista. Defaults to False.</dd>
+<dt>Returns:</dt>
+<dd>dict: Diccionario de funciones</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-tools.grammars"></span><dl class="function">
+<dt id="tools.grammars.are_empty_grammars">
+<code class="descclassname">tools.grammars.</code><code class="descname">are_empty_grammars</code><span class="sig-paren">(</span><em>valid_grammars</em>, <em>is_list=False</em>, <em>custom_warn='No se ha cargado ninguna gramática valida.'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/grammars.html#are_empty_grammars"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.grammars.are_empty_grammars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alerta de gramáticas no cargadas</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>valid_grammars (dict): diccionario de gramáticas
+is_list (bool, optional): validar si es lista. Defaults to False.
+custom_warn (str, optional): alerta personalizada. Defaults to ‘No se ha cargado ninguna gramática valida.’.</dd>
+<dt>Returns:</dt>
+<dd>[type]: [description]</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.grammars.print_grammar_info">
+<code class="descclassname">tools.grammars.</code><code class="descname">print_grammar_info</code><span class="sig-paren">(</span><em>grammar</em>, <em>grammar_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/grammars.html#print_grammar_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.grammars.print_grammar_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imprime en pantalla información sobre una gramática</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>grammar (dict): diccionario de gramática
+grammar_name (str): nombre de gramática</dd>
+<dt>Returns:</dt>
+<dd>void</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-tools.menu"></span><dl class="function">
+<dt id="tools.menu.arrow_menu">
+<code class="descclassname">tools.menu.</code><code class="descname">arrow_menu</code><span class="sig-paren">(</span><em>title='Selecciona una opción:'</em>, <em>options=[]</em>, <em>actions={}</em>, <em>helpers=[]</em>, <em>on_exit=None</em>, <em>horizontal=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/menu.html#arrow_menu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.menu.arrow_menu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Desplegá un menu horizontal o vertical seleccionable con flechas</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>title (str, optional): Titulo de menu. Defaults to “Selecciona una opción:”.
+options (list, optional): Opciones de lista. Defaults to [].
+actions (dict, optional): Acciones de lista. Defaults to {}.
+helpers (list, optional): Mensajes de ayuda. Defaults to [].
+on_exit ([type], optional): Funcion al salir. Defaults to None.
+horizontal (bool, optional): Es un menu horizontal. Defaults to False.</dd>
+<dt>Returns:</dt>
+<dd>[type]: [description]</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.menu.navigate">
+<code class="descclassname">tools.menu.</code><code class="descname">navigate</code><span class="sig-paren">(</span><em>key</em>, <em>len_options</em>, <em>horizontal</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/menu.html#navigate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.menu.navigate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Navegación con flechas para menus</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>key (str): Opción
+len_options (list): Arreglo de opciones
+horizontal (bool): Es un menu horizontal</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.menu.press_key">
+<code class="descclassname">tools.menu.</code><code class="descname">press_key</code><span class="sig-paren">(</span><em>pressed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools/menu.html#press_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.menu.press_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validar si se presiona tecla</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>pressed ([type]): [description]</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Alex Santos.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
