@@ -24,7 +24,7 @@ def get_automaton_from_grammar(grammar_dict, grammar_name):
     get_automaton_graph(grammar_dict, grammar_name)
 
     # GENERAR HTML
-    grammar_dict_to_HTML(grammar_dict, f'AP_{grammar_name}')
+    grammar_dict_to_HTML(grammar_dict, grammar_name)
 
     # MENSAJE DE OK
     print(f'{color.BOLD}{color.GREEN}  ✔️  Automata generado correctamente.{color.END}')
@@ -46,10 +46,15 @@ def get_automaton_input_from_grammar(template, grammar_dict, grammar_name):
     print(
         f'\n  {color.BOLD}Escribe una cadena para evaluar el automata: {color.END}')
 
-    word = input('')
+    count = 0
     while(True):
         word = input('')
         key = keyboard.read_key()
+
+        if count == 0:
+            keyboard.send("shift")
+
+        count += 1
 
         # SALIR
         if key == 'enter':

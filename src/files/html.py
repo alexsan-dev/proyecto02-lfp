@@ -11,7 +11,7 @@ def grammar_dict_to_HTML(grammar_dict, grammar_name):
     lines = stream.read()
 
     # REMPLAZAR VARIABLES
-    lines = lines.replace('{{ grammar_name }}', grammar_name).replace(
+    lines = lines.replace('{{ grammar_name }}', f'AP_{grammar_name}').replace(
         '{{ terminals }}', ', '.join(grammar_dict['terminals'])).replace('{{ alphabet }}', ', '.join(grammar_dict['terminals'] + grammar_dict['noTerminals']))
 
     # ESCRIBIR
@@ -43,7 +43,7 @@ def get_automaton_html(template, grammar_dict, grammar_name, word):
     svg_lines = stream_svg.read()
     svg_lines = svg_lines[svg_lines.index('<!-- Title: G Pages: 1 -->'):].replace(
         '<polygon fill="#ffffff"', '<polygon fill="transparent"')
-    lines = lines.replace('{{ grammar_name }}', grammar_name).replace(
+    lines = lines.replace('{{ grammar_name }}', f'AP_{grammar_name}').replace(
         '{{ grammar }}', str(grammar_dict)).replace("{{ word }}", word).replace("{{ svg }}", svg_lines)
 
     # ESCRIBIR
