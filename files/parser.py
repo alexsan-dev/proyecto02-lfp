@@ -10,6 +10,14 @@ from tools.colors import color
 
 
 def parse_file(lines):
+    """Convertir archivo glc a diccionario
+
+    Args:
+        lines (str): Contenido del archivo
+
+    Returns:
+        dict: Diccionario de gramática
+    """
     # GLOBALES
     grammars_dict = {}
     grammars_names = []

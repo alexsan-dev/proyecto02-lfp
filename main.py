@@ -71,6 +71,11 @@ def get_automaton():
 
 
 def get_automaton_file(template):
+    """Genera un archivo html con un automata
+
+    Args:
+        template (str): Tipo de html, recorrido o tabla
+    """
     # COMBINAR FUNCIONES
     def handle_automaton_route(grammar_name):
         get_automaton_input_from_grammar(template,

@@ -5,6 +5,12 @@ from graphviz import Digraph
 
 
 def get_automaton_graph(grammar_dict, grammar_name):
+       """Generar svg desde un diccionario de gramática con Graphviz
+
+       Args:
+          grammar_dict (dict): Diccionario de gramática
+          grammar_name (str): Nombre de gramática
+       """
     # GRAPHVIZ
     g = Digraph('G', directory='./out/reports/assets',
                 filename=f'AP_{grammar_name}.dot', format="svg")

@@ -1,5 +1,11 @@
 # GRAMÁTICA A HTML
 def grammar_dict_to_HTML(grammar_dict, grammar_name):
+    """Diccionario a html, crea un template básico
+
+    Args:
+        grammar_dict (dict): Diccionario de gramática
+        grammar_name (str): Nombre de gramática
+    """
     # LEER LINEAS DE TEMPLATE
     stream = open('./templates/digraph.html', encoding='utf-8')
     lines = stream.read()
@@ -18,6 +24,14 @@ def grammar_dict_to_HTML(grammar_dict, grammar_name):
 
 
 def get_automaton_html(template, grammar_dict, grammar_name, word):
+    """Genera un automata o tabla, con el template básico y la gramática.
+
+    Args:
+        template (str): Tipo de html, recorrido o tabla
+        grammar_dict (dict): Diccionario de gramática
+        grammar_name (str): Nombre de gramática
+        word (str): Expresion a evaluar por gramática
+    """
     # LEER LINEAS DE TEMPLATE
     stream = open(f'./templates/{template}.html', encoding='utf-8')
     lines = stream.read()

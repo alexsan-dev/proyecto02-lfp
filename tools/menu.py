@@ -12,6 +12,11 @@ is_pressed = False
 
 
 def press_key(pressed):
+    """Validar si se presiona tecla
+
+    Args:
+        pressed ([type]): [description]
+    """
     global is_pressed
     is_pressed = pressed
 
@@ -19,6 +24,13 @@ def press_key(pressed):
 
 
 def navigate(key, len_options, horizontal):
+    """Navegación con flechas para menus
+
+    Args:
+        key (str): Opción
+        len_options (list): Arreglo de opciones
+        horizontal (bool): Es un menu horizontal
+    """
     global is_pressed
     global current_option_index
 
@@ -44,6 +56,19 @@ def navigate(key, len_options, horizontal):
 
 
 def arrow_menu(title="Selecciona una opción:", options=[], actions={}, helpers=[], on_exit=None, horizontal=False):
+    """Desplegá un menu horizontal o vertical seleccionable con flechas
+
+    Args:
+        title (str, optional): Titulo de menu. Defaults to "Selecciona una opción:".
+        options (list, optional): Opciones de lista. Defaults to [].
+        actions (dict, optional): Acciones de lista. Defaults to {}.
+        helpers (list, optional): Mensajes de ayuda. Defaults to [].
+        on_exit ([type], optional): Funcion al salir. Defaults to None.
+        horizontal (bool, optional): Es un menu horizontal. Defaults to False.
+
+    Returns:
+        [type]: [description]
+    """
     # GLOBALES
     global current_option_index
     global is_pressed

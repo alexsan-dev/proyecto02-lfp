@@ -9,6 +9,15 @@ from .colors import color
 
 
 def print_grammar_info(grammar, grammar_name):
+    """Imprime en pantalla información sobre una gramática
+
+    Args:
+        grammar (dict): diccionario de gramática
+        grammar_name (str): nombre de gramática
+
+    Returns:
+        void
+    """
     # LIMPIAR
     os.system('clear' if os.name == 'posix' else 'cls')
 
@@ -39,6 +48,16 @@ def print_grammar_info(grammar, grammar_name):
 
 
 def are_empty_grammars(valid_grammars, is_list=False, custom_warn='No se ha cargado ninguna gramática valida.'):
+    """Alerta de gramáticas no cargadas
+
+    Args:
+        valid_grammars (dict): diccionario de gramáticas
+        is_list (bool, optional): validar si es lista. Defaults to False.
+        custom_warn (str, optional): alerta personalizada. Defaults to 'No se ha cargado ninguna gramática valida.'.
+
+    Returns:
+        [type]: [description]
+    """
     empty_len = len(valid_grammars if is_list else valid_grammars.keys()) == 0
 
     # MENSAJE DE ADVERTENCIA

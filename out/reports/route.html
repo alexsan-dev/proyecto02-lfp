@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;1,500&display=swap"
       rel="stylesheet"
     />
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Two+Tone"
+    rel="stylesheet"
+  />
     <style>
       * {
         margin: 0;
@@ -81,7 +85,7 @@
       }
 
       .setting:first-child > p {
-        width: 200px;
+        width: 225px;
       }
 
       #automaton_info {
@@ -100,6 +104,12 @@
       #automaton_info > #automaton_info_intro > h1 {
         margin-top: -10px;
         color: #03a9f4;
+        display: flex;
+        align-items: center;
+      }
+
+      #automaton_info > #automaton_info_intro > h1 span{
+        margin-right: 5px;
       }
 
       #automaton_info > #automaton_info_intro > p {
@@ -136,6 +146,12 @@
 
       #automaton_info > #automaton_settings p {
         color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+      }
+
+      #automaton_info > #automaton_settings p span{
+        margin-right: 5px;
       }
 
       #automaton_info > #automaton_settings input[type="range"] {
@@ -355,7 +371,12 @@
         margin-right: 15px;
         position: relative;
         top: -1px;
-        font-weight: normal
+        font-weight: normal;
+        display: flex;
+        align-items: center;
+      }
+      .automaton_entry_state > h2 span{
+        margin-right: 5px;
       }
       .automaton_entry_state > input{
         font-size: 1.7em;
@@ -375,7 +396,7 @@
     <main>
       <div id="automaton_info">
         <div id="automaton_info_intro">
-          <h1>Automata sumarnumeros</h1>
+          <h1>Automata abb</h1>
           <p>
             Aquí se puede ajustar el comportamiento del automata ademas de todos
             los controles de animación.
@@ -383,21 +404,29 @@
         </div>
         <div id="automaton_settings">
           <div class="setting">
-            <p>Ajustar velocidad: <span id="velocityText">(1.00s)</span></p>
+            <p><span class="material-icons-two-tone">
+                speed
+                </span>Ajustar velocidad: <span id="velocityText">(1.00s)</span></p>
             <input type="range" id="velocity" value="100" min="100" max="500" />
           </div>
           <div class="setting">
-            <p>Terminar en estado aceptación:</p>
+            <p><span class="material-icons-two-tone">
+                highlight_off
+                </span>Terminar en estado aceptación:</p>
             <input type="checkbox" id="acceptEnds" />
             <label for="acceptEnds" class="checkLabel"></label>
           </div>
           <div class="setting">
-            <p>Mostrar transición activa:</p>
+            <p><span class="material-icons-two-tone">
+                skip_next
+                </span>Mostrar transición activa:</p>
             <input type="checkbox" id="showTransition" />
             <label for="showTransition" class="checkLabel"></label>
           </div>
           <div class="setting">
-            <p>Color de estado activo:</p>
+            <p><span class="material-icons-two-tone">
+                palette
+                </span>Color de estado activo:</p>
             <input type="color" id="stateColor" value="#03a9f4" />
           </div>
         </div>
@@ -414,11 +443,11 @@
         </div>
       </div>
       <!-- Title: G Pages: 1 -->
-<svg width="968pt" height="630pt"
- viewBox="0.00 0.00 968.00 630.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 626)">
+<svg width="580pt" height="240pt"
+ viewBox="0.00 0.00 580.00 240.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 236)">
 <title>G</title>
-<polygon fill="transparent" stroke="transparent" points="-4,4 -4,-626 964,-626 964,4 -4,4"/>
+<polygon fill="transparent" stroke="transparent" points="-4,4 -4,-236 576,-236 576,4 -4,4"/>
 <!-- i -->
 <g id="node1" class="node">
 <title>i</title>
@@ -441,86 +470,64 @@
 <!-- q -->
 <g id="node3" class="node">
 <title>q</title>
-<ellipse fill="none" stroke="#000000" cx="553" cy="-54" rx="54" ry="54"/>
-<text text-anchor="start" x="545.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">q</text>
+<ellipse fill="none" stroke="#000000" cx="359" cy="-54" rx="54" ry="54"/>
+<text text-anchor="start" x="351.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">q</text>
 </g>
 <!-- p&#45;&gt;q -->
 <g id="edge2" class="edge">
 <title>p&#45;&gt;q</title>
-<path fill="none" stroke="#000000" d="M223.0951,-54C284.8842,-54 411.7074,-54 488.8577,-54"/>
-<polygon fill="#000000" stroke="#000000" points="488.9386,-57.5001 498.9385,-54 488.9385,-50.5001 488.9386,-57.5001"/>
+<path fill="none" stroke="#000000" d="M223.0568,-54C243.7434,-54 270.33,-54 294.4967,-54"/>
+<polygon fill="#000000" stroke="#000000" points="294.6815,-57.5001 304.6814,-54 294.6814,-50.5001 294.6815,-57.5001"/>
 <text text-anchor="middle" x="264" y="-59.8" font-family="Times,serif" font-size="19.00" fill="#000000">λ,λ;A</text>
 </g>
 <!-- q&#45;&gt;q -->
 <g id="edge4" class="edge">
 <title>q&#45;&gt;q</title>
-<path fill="none" stroke="#000000" d="M506.6051,-81.7087C488.6581,-103.5696 504.123,-126 553,-126 595.3855,-126 612.6447,-109.132 604.7776,-90.3951"/>
-<polygon fill="#000000" stroke="#000000" points="607.6374,-88.3654 599.3949,-81.7087 601.6872,-92.0526 607.6374,-88.3654"/>
-<text text-anchor="middle" x="553" y="-610.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,A;B</text>
-<text text-anchor="middle" x="553" y="-595.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,B;sumar(N)</text>
-<text text-anchor="middle" x="553" y="-580.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,N;NUMERONP</text>
-<text text-anchor="middle" x="553" y="-565.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NP;:NUMERONP</text>
-<text text-anchor="middle" x="553" y="-550.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NP;$</text>
-<text text-anchor="middle" x="553" y="-535.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NUMERO;DNUMERO</text>
-<text text-anchor="middle" x="553" y="-520.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,NUMERO;$</text>
-<text text-anchor="middle" x="553" y="-505.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;0</text>
-<text text-anchor="middle" x="553" y="-490.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;1</text>
-<text text-anchor="middle" x="553" y="-475.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;2</text>
-<text text-anchor="middle" x="553" y="-460.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;3</text>
-<text text-anchor="middle" x="553" y="-445.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;4</text>
-<text text-anchor="middle" x="553" y="-430.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;5</text>
-<text text-anchor="middle" x="553" y="-415.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;6</text>
-<text text-anchor="middle" x="553" y="-400.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;7</text>
-<text text-anchor="middle" x="553" y="-385.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;8</text>
-<text text-anchor="middle" x="553" y="-370.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,D;9</text>
-<text text-anchor="middle" x="553" y="-339.8" font-family="Times,serif" font-size="14.00" fill="#000000">sumar,sumar;λ</text>
-<text text-anchor="middle" x="553" y="-324.8" font-family="Times,serif" font-size="14.00" fill="#000000">(,(;λ</text>
-<text text-anchor="middle" x="553" y="-309.8" font-family="Times,serif" font-size="14.00" fill="#000000">),);λ</text>
-<text text-anchor="middle" x="553" y="-294.8" font-family="Times,serif" font-size="14.00" fill="#000000">:,:;λ</text>
-<text text-anchor="middle" x="553" y="-279.8" font-family="Times,serif" font-size="14.00" fill="#000000">0,0;λ</text>
-<text text-anchor="middle" x="553" y="-264.8" font-family="Times,serif" font-size="14.00" fill="#000000">1,1;λ</text>
-<text text-anchor="middle" x="553" y="-249.8" font-family="Times,serif" font-size="14.00" fill="#000000">2,2;λ</text>
-<text text-anchor="middle" x="553" y="-234.8" font-family="Times,serif" font-size="14.00" fill="#000000">3,3;λ</text>
-<text text-anchor="middle" x="553" y="-219.8" font-family="Times,serif" font-size="14.00" fill="#000000">4,4;λ</text>
-<text text-anchor="middle" x="553" y="-204.8" font-family="Times,serif" font-size="14.00" fill="#000000">5,5;λ</text>
-<text text-anchor="middle" x="553" y="-189.8" font-family="Times,serif" font-size="14.00" fill="#000000">6,6;λ</text>
-<text text-anchor="middle" x="553" y="-174.8" font-family="Times,serif" font-size="14.00" fill="#000000">7,7;λ</text>
-<text text-anchor="middle" x="553" y="-159.8" font-family="Times,serif" font-size="14.00" fill="#000000">8,8;λ</text>
-<text text-anchor="middle" x="553" y="-144.8" font-family="Times,serif" font-size="14.00" fill="#000000">9,9;λ</text>
-<text text-anchor="middle" x="553" y="-129.8" font-family="Times,serif" font-size="14.00" fill="#000000">$,$;λ</text>
+<path fill="none" stroke="#000000" d="M342.1301,-105.4519C343.5837,-117.2981 349.207,-126 359,-126 365.7327,-126 370.4945,-121.887 373.2855,-115.4669"/>
+<polygon fill="#000000" stroke="#000000" points="376.7602,-116.0093 375.8699,-105.4519 369.9822,-114.2602 376.7602,-116.0093"/>
+<text text-anchor="middle" x="359" y="-220.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,A;B</text>
+<text text-anchor="middle" x="359" y="-205.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,B;aC</text>
+<text text-anchor="middle" x="359" y="-190.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,C;aCbb</text>
+<text text-anchor="middle" x="359" y="-175.8" font-family="Times,serif" font-size="14.00" fill="#000000">λ,C;bb</text>
+<text text-anchor="middle" x="359" y="-144.8" font-family="Times,serif" font-size="14.00" fill="#000000">a,a;λ</text>
+<text text-anchor="middle" x="359" y="-129.8" font-family="Times,serif" font-size="14.00" fill="#000000">b,b;λ</text>
 </g>
 <!-- f -->
 <g id="node4" class="node">
 <title>f</title>
-<ellipse fill="none" stroke="#000000" cx="920" cy="-54" rx="36" ry="36"/>
-<ellipse fill="none" stroke="#000000" cx="920" cy="-54" rx="40" ry="40"/>
-<text text-anchor="start" x="915.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">f</text>
+<ellipse fill="none" stroke="#000000" cx="532" cy="-54" rx="36" ry="36"/>
+<ellipse fill="none" stroke="#000000" cx="532" cy="-54" rx="40" ry="40"/>
+<text text-anchor="start" x="527.5" y="-49" font-family="Times,serif" font-weight="bold" font-size="25.00" fill="#000000">f</text>
 </g>
 <!-- q&#45;&gt;f -->
 <g id="edge3" class="edge">
 <title>q&#45;&gt;f</title>
-<path fill="none" stroke="#000000" d="M607.1521,-54C677.8928,-54 800.8153,-54 869.6339,-54"/>
-<polygon fill="#000000" stroke="#000000" points="869.7902,-57.5001 879.7901,-54 869.7901,-50.5001 869.7902,-57.5001"/>
-<text text-anchor="middle" x="840.5" y="-59.8" font-family="Times,serif" font-size="19.00" fill="#000000">λ,#;λ</text>
+<path fill="none" stroke="#000000" d="M413.2636,-54C435.1491,-54 460.2473,-54 481.7142,-54"/>
+<polygon fill="#000000" stroke="#000000" points="481.9308,-57.5001 491.9308,-54 481.9307,-50.5001 481.9308,-57.5001"/>
+<text text-anchor="middle" x="452.5" y="-59.8" font-family="Times,serif" font-size="19.00" fill="#000000">λ,#;λ</text>
 </g>
 </g>
 </svg>
 
       <div class="automaton_entry_state">
-        <h2>Entrada:</h2>
+        <h2><span class="material-icons-two-tone">
+            keyboard
+            </span>Entrada:</h2>
         <input type='text' id='entry'></input>
       </div>
       <div class="automaton_entry_state">
-          <h2>Stack:</h2>
+          <h2><span class="material-icons-two-tone">
+              layers
+              </span>Stack:</h2>
           <input type='text' id='stackInput'></input>
         </div>
     </main>
   </body>
   <script>
     // GLOBALES
-    let grammar = {'noTerminals': ['A', 'B', 'N', 'NP', 'NUMERO', 'D'], 'terminals': ['sumar', '(', ')', ':', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '$'], 'initialNoTerminal': 'A', 'productions': [{'entry': 'A', 'transitions': ['B']}, {'entry': 'B', 'transitions': ['sumar', '(', 'N', ')']}, {'entry': 'N', 'transitions': ['NUMERO', 'NP']}, {'entry': 'NP', 'transitions': [':', 'NUMERO', 'NP']}, {'entry': 'NP', 'transitions': ['$']}, {'entry': 'NUMERO', 'transitions': ['D', 'NUMERO']}, {'entry': 'NUMERO', 'transitions': ['$']}, {'entry': 'D', 'transitions': ['0']}, {'entry': 'D', 'transitions': ['1']}, {'entry': 'D', 'transitions': ['2']}, {'entry': 'D', 'transitions': ['3']}, {'entry': 'D', 'transitions': ['4']}, {'entry': 'D', 'transitions': ['5']}, {'entry': 'D', 'transitions': ['6']}, {'entry': 'D', 'transitions': ['7']}, {'entry': 'D', 'transitions': ['8']}, {'entry': 'D', 'transitions': ['9']}]}
-    let grammarName = "sumarnumeros";
-    let word = "sumar(5:1)";
+    let grammar = {'noTerminals': ['A', 'B', 'C'], 'terminals': ['a', 'b'], 'initialNoTerminal': 'A', 'productions': [{'entry': 'A', 'transitions': ['B']}, {'entry': 'B', 'transitions': ['a', 'C']}, {'entry': 'C', 'transitions': ['a', 'C', 'b', 'b']}, {'entry': 'C', 'transitions': ['b', 'b']}]}
+    let grammarName = "abb";
+    let word = "aabbbb";
     let mainStack = [];
     let currentCharIndex = 0;
     let sliderSpace = 0;
@@ -534,6 +541,7 @@
     const acceptEndsInput = document.getElementById("acceptEnds");
     const showTransitionInput = document.getElementById("showTransition");
     const automatonSettings = document.getElementById("automaton_settings");
+    const coloredIcon = document.getElementById('coloredIcon')
     const automatonInfoIntro = document.querySelector(
       "#automaton_info_intro > h1"
     );
@@ -569,6 +577,9 @@
     const wordTokens = wordTokenIndex.map((tokenIndex, index) =>
       word.substring(tokenIndex, wordTokenIndex[index + 1] || undefined)
     );
+
+    // ALERTA DE EXPRESION INVALIDA
+    if(wordTokens.join("") !== word) alert("Error, expresión invalida")
 
     console.log(wordTokens);
 
@@ -621,10 +632,14 @@
           if (!acceptEnds) {
             if (!(step > 0 && mainStack.length === 0)) mainAnimations();
             else {
+              alert("Secuencia terminada, expresión valida")
               paused = true;
               togglePlayBtn();
             }
-          } else mainAnimations();
+          } else {
+            if(mainStack.length === 0 && step > 0) alert("Secuencia terminada, expresión valida")
+            mainAnimations()
+          };
         }
       }, velocity * 1000);
 

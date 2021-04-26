@@ -14,6 +14,12 @@ from tools.colors import color
 
 
 def get_automaton_from_grammar(grammar_dict, grammar_name):
+    """Genera un archivo svg y html de la gramática y genera el template inicial
+
+    Args:
+        grammar_dict (dict): Diccionario de gramática
+        grammar_name (str): Nombre de gramática
+    """
     # GENERAR GRAFO
     get_automaton_graph(grammar_dict, grammar_name)
 
@@ -26,6 +32,13 @@ def get_automaton_from_grammar(grammar_dict, grammar_name):
 
 
 def get_automaton_input_from_grammar(template, grammar_dict, grammar_name):
+    """Obtiene una expresion a evaluar y la convierte en un html
+
+    Args:
+        template (str): Tipo de html, recorrido o tabla
+        grammar_dict (dict): Diccionario de gramática
+        grammar_name (str): Nombre de gramática
+    """
     # LIMPIAR
     os.system('clear' if os.name == 'posix' else 'cls')
 
